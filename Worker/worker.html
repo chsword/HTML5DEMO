@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Worker</title>
+        <meta name="viewport" content="width=device-width" />
+    </head>
+    <body>
+      
+	<div id="logger"></div>
+<script>
+      var w = new Worker('/Worker/test.js');
+      w.onmessage  = function (event) {
+      	//console.log(event.data);
+      	document.getElementById("logger").innerHTML=      	event.data;
+      };
+      w.onerror = function (event) {console.log(event.message, event); };
+		function fun(){
+			console.log("start");
+		      w.postMessage('');
+		}
+     //console.log(1);
+</script>
+<button onclick="fun()">proc</button>
+    </body>
+</html>

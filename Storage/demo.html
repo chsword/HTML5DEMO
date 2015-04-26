@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>无标题 1</title>
+</head>
+
+<body>
+<script>
+window.addEventListener("storage",function(e){
+	var msg=e.key+","+e.oldValue+","+e.newValue;
+	console.log(msg);
+	document.getElementById("msg").innerHTML+=	e.key+","+e.oldValue+","+e.newValue;
+},false);
+
+localStorage.setItem("m",new Date().toString());
+var val=localStorage.getItem("m");
+console.log(val);
+localStorage.setItem("m",new Date().toString());
+localStorage.removeItem("m");
+</script>
+<div id="msg"></div>
+</body>
+
+</html>

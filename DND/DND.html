@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>dnd</title>
+        <meta name="viewport" content="width=device-width" />
+    </head>
+    <body>
+   
+  <div id="box"></div>
+  <ul>
+    <li><a id="one" href="#"  >1</a></li>
+    <li><a href="#" id="two"  >2</a></li>
+    <li><a href="#" id="three">3</a></li>
+    <li><a href="#" id="four" >4</a></li>
+    <li><a href="#" id="five" >5</a></li>
+  </ul>
+<script>
+ var links = document.querySelectorAll('li > a'), el = null;
+  for (var i = 0; i < links.length; i++) {
+    el = links[i];
+  
+    el.setAttribute('draggable', 'true');
+  
+    addEvent(el, 'dragstart', function (e) {
+      e.dataTransfer.effectAllowed = 'copy';
+      e.dataTransfer.setData('Text', this.id);
+    });
+  }
+
+  var bin = document.querySelector('#bin');
+  addEvent(bin, 'dragover', function (e) {
+    if (e.preventDefault) e.preventDefault(); // allows us to drop
+    this.className = 'over';
+    e.dataTransfer.dropEffect = 'copy';
+    return false;
+  });
+
+  // to get IE to work
+  addEvent(bin, 'dragenter', function (e) {
+    this.className = 'over';
+    return false;
+  });
+
+  addEvent(bin, 'dragleave', function () {
+    this.className = '';
+  });
+
+  addEvent(bin, 'drop', function (e) {
+    if (e.stopPropagation) e.stopPropagation(); // stops the browser from redirecting...why???
+
+    var el = document.getElementById(e.dataTransfer.getData('Text'));
+    
+    el.parentNode.removeChild(el);
+
+    // stupid nom text + fade effect
+    bin.className = '';
+    yum.innerHTML = eat[parseInt(Math.random() * eat.length)];
+
+    var y = yum.cloneNode(true);
+    bin.appendChild(y);
+
+    setTimeout(function () {
+      var t = setInterval(function () {
+        if (y.style.opacity <= 0) {
+          if (msie) { // don't bother with the animation
+            y.style.display = 'none';
+          }
+          clearInterval(t); 
+        } else {
+          y.style.opacity -= 0.1;
+        }
+      }, 50);
+    }, 250);
+
+    return false;
+  });
+</script>
+
+
+    </body>
+    </html>

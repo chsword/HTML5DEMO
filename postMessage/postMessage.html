@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>无标题 1</title>
+</head>
+
+<body>
+frame1
+<iframe src="http://127.0.0.12/postMessage/frame1.html" id="f1"></iframe>
+frame2
+<iframe src="http://127.0.0.13/postMessage/frame2.html" id="f2"></iframe>
+<script>
+function sendMsg(){
+	var msg=new Date();
+	var f1 = document.getElementById("f1").contentWindow;
+	var f2 = document.getElementById("f2").contentWindow;
+	f2.postMessage(msg.toString(),"http://127.0.0.13");
+	f1.postMessage(msg.toString(),"http://127.0.0.12");
+}
+	window.onmessage = function(e){
+		document.getElementById("msg").innerHTML=e.data+"<br>"+e.origin;
+	};
+	
+</script>
+<button onclick="sendMsg();">send</button>
+<div id="msg"></div>
+</body>
+
+</html>

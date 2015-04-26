@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>History</title>
+        <meta name="viewport" content="width=device-width" />
+    </head>
+    <body>
+<button onclick="push();">push</button>
+<script>
+function push(){
+	var state={
+		state:new Date()
+	};
+	window.history.pushState(state,"title","");
+}
+window.addEventListener('popstate', function(e){
+  if (history.state){
+	var state = e.state;
+	console.log(state);
+  }
+}, false);
+</script>
+
+
+    </body>
+    </html>

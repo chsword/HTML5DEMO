@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Canvas</title>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+<div>
+<button onclick="drawLine();">线</button>
+<button onclick="drawRect();">矩形</button>
+<button onclick="drawLine();">线</button>
+</div>
+  <canvas id="can" style="border: 1px solid;" width="480" height="360">不支持</canvas>
+  <script>
+  function drawLine() { 
+	  var canvas = document.getElementById('can'); 
+	  var context = canvas.getContext('2d'); 
+	  context.beginPath(); 
+	  context.moveTo(70, 140); 
+	  context.lineTo(140, 70); 
+	  context.stroke(); 
+  } 
+  function drawRect() { 
+	  var canvas = document.getElementById('can'); 
+	  var context = canvas.getContext('2d'); 
+	  context.fillStyle="#5E97FF";
+	  context.fillRect(100, 100, 100, 200)
+  } 
+  </script>
+
+</body>
+</html>

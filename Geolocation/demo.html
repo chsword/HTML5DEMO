@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<script>
+function getLocation(){
+	if(navigator.geolocation)
+		navigator.geolocation.getCurrentPosition(displayInfo,onError);
+	else
+		document.getElementById("locationData").innerHTML="Sorry-yourbrowserdoesn'tsupportgeolocation!";
+}
+
+function displayInfo(position){
+	var lat=position.coords.latitude;
+	var lon=position.coords.longitude;
+	var text="lat:"+lat+",long:"+lon;
+	document.getElementById("locationData").innerHTML=text+
+	"<a href=http://cn.bing.com/ditu/default.aspx?v=2&FORM=LMLTCP&cp="+lat+"~"+lon+"&style=r&lvl=13&tilt=-90&dir=0&alt=-1000&phx=0&phy=0&phscl=1&encType=1>地图</a>";
+	
+}
+function onError(error) {
+	var locationElement =document.getElementById("locationData");
+	switch(error.code) {
+		case error.PERMISSION_DENIED:
+			locationElement.innerHTML= "PERMISSION_DENIED";
+			break;
+		case error.POSITION_UNAVAILABLE:
+			locationElement.innerHTML= "POSITION_UNAVAILABLE";
+			break;
+		case error.TIMEOUT:
+			locationElement.innerHTML= "TIMEOUT";
+			break;
+		case error.UNKNOWN_ERROR:
+			locationElement.innerHTML= "UNKNOWN_ERROR";
+			break;
+		default:
+			locationElement.innerHTML= "OTHER";
+			break;
+	}
+}
+</script>
+</head>
+<body>
+<input type="button"value="获取位置" onclick="getLocation()"/>
+
+<div id="locationData">
+</div>
+</body>
+</html>

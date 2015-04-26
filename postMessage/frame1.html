@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>无标题 1</title>
+</head>
+
+<body style="background:red;color:white">
+<div id="msg"></div>
+<script>
+function sendMsg(){
+	var f1 = parent.window;
+	var msg=new Date();
+	f1.postMessage(msg.toString(),"http://127.0.0.11");
+}
+
+
+window.onmessage = function(e){
+	document.getElementById("msg").innerHTML=e.data+"<br>"+e.origin;};
+</script>
+<button onclick="sendMsg();">send</button>
+</body>
+
+</html>
